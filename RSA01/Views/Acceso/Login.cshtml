@@ -1,0 +1,43 @@
+﻿@model RSA01.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+<div class="container">
+
+    @using (Html.BeginForm("Login", "Acceso", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form"}))
+    {       
+        @Html.AntiForgeryToken()
+        
+        <div class="login-wrap">            
+            <p class="login-img"><i class="icon_lock_alt"></i></p>
+
+             @Html.ValidationSummary(true, "", new { @class = "text-danger" })           
+            <div>
+             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_profile"></i></span>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder="Username"})
+                @*<input type="text" class="form-control" placeholder="Username" autofocus>*@
+            </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })            
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder="Password" })                
+                @*<input type="password" class="form-control" placeholder="Password">*@
+            </div>
+            <div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </div>
+            @*<button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>*@
+            </div>
+
+
+        </div>
+    }
+
+
+</div>

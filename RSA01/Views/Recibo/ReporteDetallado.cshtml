@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Seleccione Evento:</label>
+                <select class="form-control"
+                        ng-options="a.nombre for a in eventos"
+                        ng-model="idEvento"
+                        ng-change="MostrarBoton()">
+                </select>
+        </div>
+    </form>
+</div>
+<br />
+
+<div class="row" ng-show="mostrarboton">
+    <div class="col-md-5 col-md-offset-2">
+        <button class="btn btn-primary btn-lg" ng-click="reporteDetallado(idEvento)">Generar Reporte Detallado</button>
+    </div>
+</div>

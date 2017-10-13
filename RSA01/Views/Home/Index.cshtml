@@ -1,0 +1,355 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="appMain">
+<head>
+    
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap CSS --> 
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- bootstrap theme -->
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+
+    <!--external css-->
+    <!-- font icon -->
+    <link href="~/Content/elegant-icons-style.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!-- full calendar css-->
+    <link href="~/Content/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="~/Content/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="~/Content/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- owl carousel -->
+    <link href="~/Content/jquery-jvectormap-1.2.2.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="~/Content/jquery-ui-1.10.4.min.css" rel="stylesheet" />
+    <link href="~/Content/widgets.css" rel="stylesheet" />
+    <link href="~/Content/xcharts.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/style-responsive.css" rel="stylesheet" />
+
+    <title>Index</title>
+</head>
+<body>
+ 
+
+
+  <!-- container section start -->
+    <section id="container" class="">
+      <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="MENU" data-placement="bottom"><i class="icon_menu"></i></div>
+            </div>
+
+            <!--logo start-->
+            <a ui-sref="Home" class="logo">Gestion <span class="lite">Recibos</span></a>
+            <!--logo end-->
+
+@*            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                <ul class="nav top-menu">                    
+                    <li>
+                        <form class="navbar-form">
+                            <input class="form-control" placeholder="Search" type="text">
+                        </form>
+                    </li>                    
+                </ul>
+                <!--  search form end -->                
+            </div>*@
+
+    @if (Request.IsAuthenticated) {
+            <div class="top-nav notification-row">                
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    
+                    <!-- user login dropdown start-->
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">                               
+                                <i class="fa fa-fw fa-user"></i>
+                            </span>
+                            <span class="username">@User.Identity.Name.ToUpper()</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+@*                         <li class="eborder-top">
+                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="icon_chat_alt"></i> Chats</a>
+                            </li>  
+                            <li>*@
+                                <li>
+                                    @using (Html.BeginForm("LogOff", "Acceso", FormMethod.Post, new { id = "logoutForm" })) {
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-fw fa-power-off"></i> Log off</a>
+                                    } 
+                              </li>
+@*                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                            </li>*@
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+            }
+
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu">                
+                  <li class="active">
+                      <a class="" ui-sref="reciboNuevo">
+                          <i class="icon_house_alt"></i>
+                          <span>Nuevo Recibo</span>
+                      </a>
+                  </li>
+                  <li class="active">
+                      <a class="" ui-sref="datosPais">
+                          <i class="icon_document_alt"></i>
+                          <span>Resumen por Pais</span>
+                      </a>
+                  </li>
+                  <li class="active">
+                      <a class="" ui-sref="datosConcepto">
+                          <i class="icon_document_alt"></i>
+                          <span>Resumen Concepto</span>
+                      </a>
+                  </li>
+                  <li class="active">
+                      <a class="" ui-sref="datosTotales">
+                          <i class="icon_document_alt"></i>
+                          <span>Resumen Totales</span>
+                      </a>
+                  </li>
+                  <li class="active">
+                      <a class="" ui-sref="inforeporte">
+                          <i class="icon_document_alt"></i>
+                          <span>Reporte Detallado</span>
+                      </a>
+                  </li>
+    <!------------------------------------------------------------------------------------------------------------------------
+				  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_document_alt"></i>
+                          <span>Forms</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a class="" href="#">Form Elements</a></li>                          
+                          <li><a class="" href="#">Form Validation</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_desktop"></i>
+                          <span>UI Fitures</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a class="" href="#">Elements</a></li>
+                          <li><a class="" href="#">Buttons</a></li>
+                          <li><a class="" href="#">Grids</a></li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a class="" ui-sref="#">
+                          <i class="icon_genius"></i>
+                          <span>Widgets</span>
+                      </a>
+                  </li>
+                  <li>                     
+                      <a class="" href="#">
+                          <i class="icon_piechart"></i>
+                          <span>Charts</span>
+                          
+                      </a>
+                                         
+                  </li>
+                             
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_table"></i>
+                          <span>Tables</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">
+                          <li><a class="" href="#">Basic Table</a></li>
+                      </ul>
+                  </li>
+                  
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="">
+                          <i class="icon_documents_alt"></i>
+                          <span>Pages</span>
+                          <span class="menu-arrow arrow_carrot-right"></span>
+                      </a>
+                      <ul class="sub">                          
+                          <li><a class="" href="#">Profile</a></li>
+                          <li><a class="" href="#"><span>Login Page</span></a></li>
+                          <li><a class="" href="#">Blank Page</a></li>
+                          <li><a class="" href="#">404 Error</a></li>
+                      </ul>
+                  </li>
+------------------------------------------------------------------------------------------------------------------------>                  
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
+
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+          <div ui-view></div>
+          </section>
+      </section>
+      <!--main content end-->
+    </section>
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="~/Scripts/vendor/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/vendor/jquery.js"></script>
+    <script src="~/Scripts/vendor/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/vendor/jquery-ui-1.9.2.custom.min.js"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/vendor/bootstrap.min.js"></script>
+
+    <!-- nice scroll -->
+    <script src="~/Scripts/vendor/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/vendor/jquery.nicescroll.js"></script>
+
+    <!-- charts scripts -->
+    <script src="~/Scripts/vendor/jquery.knob.js"></script>
+    <script src="~/Scripts/vendor/jquery.sparkline.js"></script>
+    <script src="~/Scripts/vendor/jquery.easy-pie-chart.js"></script>
+    <script src="~/Scripts/vendor/owl.carousel.js"></script>
+
+    <!-- jQuery full calendar -->
+    <script src="~/Scripts/vendor/fullcalendar.min.js"></script>
+    <script src="~/Scripts/vendor/fullcalendar.js"></script>
+
+    <!--script for this page only-->
+    <script src="~/Scripts/vendor/calendar-custom.js"></script>
+    <script src="~/Scripts/vendor/jquery.rateit.min.js"></script>
+
+    <!-- custom select -->
+    <script src="~/Scripts/vendor/jquery.customSelect.min.js"></script>
+    <script src="~/Scripts/vendor/Chart.js"></script>
+
+    <!--custome script for all page-->
+    <script src="~/Scripts/vendor/scripts.js"></script>
+
+    <!-- custom script for this page-->
+    <script src="~/Scripts/vendor/sparkline-chart.js"></script>
+    <script src="~/Scripts/vendor/easy-pie-chart.js"></script>
+    <script src="~/Scripts/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/Scripts/vendor/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Scripts/vendor/xcharts.min.js"></script>
+    <script src="~/Scripts/vendor/jquery.autosize.min.js"></script>
+    <script src="~/Scripts/vendor/jquery.placeholder.min.js"></script>
+    <script src="~/Scripts/vendor/gdp-data.js"></script>
+    <script src="~/Scripts/vendor/morris.min.js"></script>
+    <script src="~/Scripts/vendor/sparklines.js"></script>
+    <script src="~/Scripts/vendor/charts.js"></script>
+    <script src="~/Scripts/vendor/jquery.slimscroll.min.js"></script>
+
+  <!--<script>
+
+      //knob
+      $(function() {
+        $(".knob").knob({
+          'draw' : function () { 
+            $(this.i).val(this.cv + '%')
+          }
+        })
+      });
+
+      //carousel
+      $(document).ready(function() {
+          $("#owl-slider").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+	  
+	  /* ---------- Map ---------- */
+	$(function(){
+	  $('#map').vectorMap({
+	    map: 'world_mill_en',
+	    series: {
+	      regions: [{
+	        values: gdpData,
+	        scale: ['#000', '#000'],
+	        normalizeFunction: 'polynomial'
+	      }]
+	    },
+		backgroundColor: '#eef3f7',
+	    onLabelShow: function(e, el, code){
+	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
+	    }
+	  });
+	});
+
+  </script>-->
+
+    <!-- Angular -->
+
+   <<script src="~/Scripts/vendor/angular.min.js"></script>
+    <script src="~/Scripts/vendor/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/vendor/angular-table.1.0.7.js"></script>
+    <script src="~/Scripts/app/app.js"></script>
+    <script src="~/Scripts/routing/Routing.js"></script>
+    <script src="~/Scripts/services/ServicePost.js"></script>
+    <script src="~/Scripts/services/ServiceRecibo.js"></script>
+    <script src="~/Scripts/directivas/formsDirectives.js"></script>
+
+
+    <script src="~/Scripts/controller/CtrlReciboNuevo.js"></script>
+    <script src="~/Scripts/controller/CtrlReciboConsulta.js"></script>
+    <script src="~/Scripts/controller/CtrldatosPais.js"></script>
+    <script src="~/Scripts/controller/CtrldatosConcepto.js"></script>
+    <script src="~/Scripts/controller/CtrldatosTotales.js"></script>
+    <script src="~/Scripts/controller/CtrlInfoDetalle.js"></script>
+
+
+</body>
+</html>
+

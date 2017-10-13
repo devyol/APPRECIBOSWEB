@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d2545f96a9484f34b0ebe919c322e652" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_CORRELATIVO" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_EVENTO" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_EVENTO_OPCION" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_PAIS" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_RECIBO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_REGION" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelRecibo.SAG01_USUARIO" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ModelRecibo.FK_EVENTO" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelRecibo.FK_REC_EVE" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelRecibo.FK_REC_OPC" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelRecibo.FK_REC_PAIS" ManuallyRouted="false" />
+        <AssociationConnector Association="ModelRecibo.FK_REGION_PAIS" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

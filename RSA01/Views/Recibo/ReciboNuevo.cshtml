@@ -1,0 +1,136 @@
+﻿@{
+    Layout = null;
+}
+<!------------------------------------Combo que muestra los Eventos Activos------------------------------------->
+<div>
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Seleccione Evento:</label>
+                <select class="form-control"
+                        ng-options="a.nombre for a in eventos"
+                        ng-model="idEvento"
+                        ng-change="listarRecibosEvento(idEvento)">
+                </select>
+        </div>
+        <div class="form-group" ng-show="mostrarBotonNuevo">
+            <button type="button" class="btn btn-info btn-sm" ng-click="nuevoRecibo()">Nuevo Recibo</button>
+        </div>
+        <div class="form-group" ng-show="mostrarBotonRetroceder">
+            <button type="button" class="btn btn-info btn-sm" ng-click="retroceder(idEvento)">Regresar</button>
+        </div>
+    </form>
+</div>
+<div>
+    <br />
+</div>
+
+<!------------------------------------Combo que muestra los Eventos Activos------------------------------------->
+
+<div ng-show ="mostrarListaRecibos">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input type="text" class="form-control" placeholder="Buscar Recibo" value="" ng-model="buscar.idrecibo"/>
+            </div>
+        </div>
+    </div>
+    <div>
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-condensed table-bordered table-striped table-advance flip-content" at-table at-paginated at-list="listarecibos | filter:buscar" at-config="configList">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td at-title="No Recibo" width="2%"><font color="black" size="2.5px">{{item.idrecibo}}</font></td>
+                            <td at-title="Nombre" width="5%"><font color="black" size="2.5px">{{item.nombre}}</font></td>
+                            <td at-title="Total" width="2%"><font color="black" size="2.5px">{{item.total}}</font></td>
+                            <td at-title="Pais" width="2%"><font color="black" size="2.5px">{{item.pais}}</font></td>
+                            <td at-title="Estado" width="3%"><font color="black" size="2.5px">{{item.estado}}</font></td>
+                            <td at-title="Usuario" width="4%"><font color="black" size="2.5px">{{item.usuario}}</font></td>
+                            <td at-title="Anular" width="1%"><button type="button" class="btn btn-primary btn-sm" ng-click="anularRecibo(item)"><i class="icon-edit"></i> Anular</button></td>
+                            <td at-title="Imprimir" width="1%"><button type="button" class="btn btn-primary btn-sm" ng-click="imprimirRecibo(item)"><i class="icon-add-user"></i> Imprimir</button></td>                            
+                        </tr>
+                    </tbody>
+                </table>
+                <at-pagination at-list="listarecibos" first-text="Primera" at-config="configList"></at-pagination>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!------------------------------------Muesta el Formulario para Registrar los Recibos------------------------------------->
+<div class="container" ng-show="mostrarFormularioRecibo">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <section class="panel">
+                <header class="panel-heading">
+                    Recibo del Evento {{nombreevento}}
+                </header>
+                <div class="panel-body">
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Nombre</label>
+                            <div class="col-sm-7">
+                            <input type="text" ng-model="recibo.nombre" class="form-control" placeholder="Nombre" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Pais</label>
+                            <div class="col-sm-5">
+                                <select chosen="paises"
+                                        id="paises"
+                                        class="form-control"                                         
+                                        ng-options="pais.descripcion for pais in paises" 
+                                        ng-model="recibo.pais_"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Opcion</label>
+                            <div class="col-sm-5">
+                                <select class="form-control"                                         
+                                        ng-options="opcion.descripcion for opcion in opciones" 
+                                        ng-model="recibo.opcion_"
+                                        ng-change ="detalleOpcion(recibo.opcion_)"
+                                    >                                        
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Precio</label>
+                            <div class="col-sm-3">
+                            <input type="text" class="form-control" ng-model="recibo.valor" placeholder="Precio" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Cantidad</label>
+                            <div class="col-sm-3">
+                                <input type="text" ng-model="recibo.cantidad" class="form-control" placeholder="Cantidad" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Total</label>
+                            <div class="col-sm-3">                                
+                                <input type="text" class="form-control" value="{{recibo.valor*recibo.cantidad}}" placeholder="Total" ng-disabled="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Observaciones</label>
+                            <div class="col-sm-7">
+                                <textarea class="form-control" rows="2" ng-model="recibo.detalle" placeholder="Observaciones del Recibo - 100 caracteres máximo"></textarea>
+                            </div>
+                        </div>
+                        <button ng-click="guardar(recibo,idEvento)" class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!------------------------------------Muesta el Formulario para Registrar los Recibos------------------------------------->
+

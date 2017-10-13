@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ModelRecibo.Store" Alias="Self" Provider="Oracle.DataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ModelReciboStoreContainer">
+          <EntitySet Name="SAG01_CORRELATIVO" EntityType="ModelRecibo.Store.SAG01_CORRELATIVO" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_EVENTO" EntityType="ModelRecibo.Store.SAG01_EVENTO" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_EVENTO_OPCION" EntityType="ModelRecibo.Store.SAG01_EVENTO_OPCION" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_PAIS" EntityType="ModelRecibo.Store.SAG01_PAIS" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_RECIBO" EntityType="ModelRecibo.Store.SAG01_RECIBO" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_REGION" EntityType="ModelRecibo.Store.SAG01_REGION" store:Type="Tables" Schema="SAG01" />
+          <EntitySet Name="SAG01_USUARIO" EntityType="ModelRecibo.Store.SAG01_USUARIO" store:Type="Tables" Schema="SAG01" />
+          <AssociationSet Name="FK_EVENTO" Association="ModelRecibo.Store.FK_EVENTO">
+            <End Role="SAG01_EVENTO" EntitySet="SAG01_EVENTO" />
+            <End Role="SAG01_EVENTO_OPCION" EntitySet="SAG01_EVENTO_OPCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_EVE" Association="ModelRecibo.Store.FK_REC_EVE">
+            <End Role="SAG01_EVENTO" EntitySet="SAG01_EVENTO" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_OPC" Association="ModelRecibo.Store.FK_REC_OPC">
+            <End Role="SAG01_EVENTO_OPCION" EntitySet="SAG01_EVENTO_OPCION" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_PAIS" Association="ModelRecibo.Store.FK_REC_PAIS">
+            <End Role="SAG01_PAIS" EntitySet="SAG01_PAIS" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REGION_PAIS" Association="ModelRecibo.Store.FK_REGION_PAIS">
+            <End Role="SAG01_REGION" EntitySet="SAG01_REGION" />
+            <End Role="SAG01_PAIS" EntitySet="SAG01_PAIS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SAG01_CORRELATIVO">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="number" Nullable="false" />
+          <Property Name="CORRELATIVO_DISPONIBLE" Type="number" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_EVENTO">
+          <Key>
+            <PropertyRef Name="EVENTO" />
+          </Key>
+          <Property Name="EVENTO" Type="number" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="250" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_EVENTO_OPCION">
+          <Key>
+            <PropertyRef Name="OPCION" />
+          </Key>
+          <Property Name="OPCION" Type="number" Nullable="false" />
+          <Property Name="EVENTO" Type="number" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="200" />
+          <Property Name="PRECIO" Type="number" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_PAIS">
+          <Key>
+            <PropertyRef Name="PAIS" />
+          </Key>
+          <Property Name="PAIS" Type="varchar2" Nullable="false" MaxLength="5" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" />
+          <Property Name="REGION" Type="number" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_RECIBO">
+          <Key>
+            <PropertyRef Name="RECIBO" />
+          </Key>
+          <Property Name="RECIBO" Type="number" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="250" />
+          <Property Name="CANTIDAD" Type="number" />
+          <Property Name="VALOR" Type="number" />
+          <Property Name="TOTAL" Type="number" />
+          <Property Name="DETALLE" Type="varchar2" MaxLength="500" />
+          <Property Name="EVENTO" Type="number" />
+          <Property Name="OPCION" Type="number" />
+          <Property Name="PAIS" Type="varchar2" MaxLength="5" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_REGION">
+          <Key>
+            <PropertyRef Name="REGION" />
+          </Key>
+          <Property Name="REGION" Type="number" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="150" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <EntityType Name="SAG01_USUARIO">
+          <Key>
+            <PropertyRef Name="USUARIO" />
+          </Key>
+          <Property Name="USUARIO" Type="varchar2" Nullable="false" MaxLength="50" />
+          <Property Name="NOMBRE" Type="varchar2" MaxLength="150" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="100" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="250" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="128" />
+          <Property Name="ESTADO_REGISTRO" Type="varchar2" MaxLength="1" />
+          <Property Name="USUARIO_CREACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_CREACION" Type="date" />
+          <Property Name="USUARIO_MODIFICACION" Type="varchar2" MaxLength="100" />
+          <Property Name="FECHA_MODIFICACION" Type="date" />
+        </EntityType>
+        <Association Name="FK_EVENTO">
+          <End Role="SAG01_EVENTO" Type="ModelRecibo.Store.SAG01_EVENTO" Multiplicity="0..1" />
+          <End Role="SAG01_EVENTO_OPCION" Type="ModelRecibo.Store.SAG01_EVENTO_OPCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO">
+              <PropertyRef Name="EVENTO" />
+            </Principal>
+            <Dependent Role="SAG01_EVENTO_OPCION">
+              <PropertyRef Name="EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_EVE">
+          <End Role="SAG01_EVENTO" Type="ModelRecibo.Store.SAG01_EVENTO" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.Store.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO">
+              <PropertyRef Name="EVENTO" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_OPC">
+          <End Role="SAG01_EVENTO_OPCION" Type="ModelRecibo.Store.SAG01_EVENTO_OPCION" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.Store.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO_OPCION">
+              <PropertyRef Name="OPCION" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="OPCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_PAIS">
+          <End Role="SAG01_PAIS" Type="ModelRecibo.Store.SAG01_PAIS" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.Store.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_PAIS">
+              <PropertyRef Name="PAIS" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="PAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REGION_PAIS">
+          <End Role="SAG01_REGION" Type="ModelRecibo.Store.SAG01_REGION" Multiplicity="0..1" />
+          <End Role="SAG01_PAIS" Type="ModelRecibo.Store.SAG01_PAIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_REGION">
+              <PropertyRef Name="REGION" />
+            </Principal>
+            <Dependent Role="SAG01_PAIS">
+              <PropertyRef Name="REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelRecibo" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EntitiesRecibo" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="SAG01_CORRELATIVO" EntityType="ModelRecibo.SAG01_CORRELATIVO" />
+          <EntitySet Name="SAG01_EVENTO" EntityType="ModelRecibo.SAG01_EVENTO" />
+          <EntitySet Name="SAG01_EVENTO_OPCION" EntityType="ModelRecibo.SAG01_EVENTO_OPCION" />
+          <EntitySet Name="SAG01_PAIS" EntityType="ModelRecibo.SAG01_PAIS" />
+          <EntitySet Name="SAG01_RECIBO" EntityType="ModelRecibo.SAG01_RECIBO" />
+          <EntitySet Name="SAG01_REGION" EntityType="ModelRecibo.SAG01_REGION" />
+          <EntitySet Name="SAG01_USUARIO" EntityType="ModelRecibo.SAG01_USUARIO" />
+          <AssociationSet Name="FK_EVENTO" Association="ModelRecibo.FK_EVENTO">
+            <End Role="SAG01_EVENTO" EntitySet="SAG01_EVENTO" />
+            <End Role="SAG01_EVENTO_OPCION" EntitySet="SAG01_EVENTO_OPCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_EVE" Association="ModelRecibo.FK_REC_EVE">
+            <End Role="SAG01_EVENTO" EntitySet="SAG01_EVENTO" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_OPC" Association="ModelRecibo.FK_REC_OPC">
+            <End Role="SAG01_EVENTO_OPCION" EntitySet="SAG01_EVENTO_OPCION" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REC_PAIS" Association="ModelRecibo.FK_REC_PAIS">
+            <End Role="SAG01_PAIS" EntitySet="SAG01_PAIS" />
+            <End Role="SAG01_RECIBO" EntitySet="SAG01_RECIBO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REGION_PAIS" Association="ModelRecibo.FK_REGION_PAIS">
+            <End Role="SAG01_REGION" EntitySet="SAG01_REGION" />
+            <End Role="SAG01_PAIS" EntitySet="SAG01_PAIS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SAG01_CORRELATIVO">
+          <Key>
+            <PropertyRef Name="CORRELATIVO" />
+          </Key>
+          <Property Name="CORRELATIVO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="CORRELATIVO_DISPONIBLE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="SAG01_EVENTO">
+          <Key>
+            <PropertyRef Name="EVENTO" />
+          </Key>
+          <Property Name="EVENTO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NOMBRE" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+          <NavigationProperty Name="SAG01_EVENTO_OPCION" Relationship="ModelRecibo.FK_EVENTO" FromRole="SAG01_EVENTO" ToRole="SAG01_EVENTO_OPCION" />
+          <NavigationProperty Name="SAG01_RECIBO" Relationship="ModelRecibo.FK_REC_EVE" FromRole="SAG01_EVENTO" ToRole="SAG01_RECIBO" />
+        </EntityType>
+        <EntityType Name="SAG01_EVENTO_OPCION">
+          <Key>
+            <PropertyRef Name="OPCION" />
+          </Key>
+          <Property Name="OPCION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="EVENTO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="PRECIO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+          <NavigationProperty Name="SAG01_EVENTO" Relationship="ModelRecibo.FK_EVENTO" FromRole="SAG01_EVENTO_OPCION" ToRole="SAG01_EVENTO" />
+          <NavigationProperty Name="SAG01_RECIBO" Relationship="ModelRecibo.FK_REC_OPC" FromRole="SAG01_EVENTO_OPCION" ToRole="SAG01_RECIBO" />
+        </EntityType>
+        <EntityType Name="SAG01_PAIS">
+          <Key>
+            <PropertyRef Name="PAIS" />
+          </Key>
+          <Property Name="PAIS" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="REGION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+          <NavigationProperty Name="SAG01_RECIBO" Relationship="ModelRecibo.FK_REC_PAIS" FromRole="SAG01_PAIS" ToRole="SAG01_RECIBO" />
+          <NavigationProperty Name="SAG01_REGION" Relationship="ModelRecibo.FK_REGION_PAIS" FromRole="SAG01_PAIS" ToRole="SAG01_REGION" />
+        </EntityType>
+        <EntityType Name="SAG01_RECIBO">
+          <Key>
+            <PropertyRef Name="RECIBO" />
+          </Key>
+          <Property Name="RECIBO" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NOMBRE" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="CANTIDAD" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="VALOR" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TOTAL" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DETALLE" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="EVENTO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OPCION" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PAIS" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+          <NavigationProperty Name="SAG01_EVENTO" Relationship="ModelRecibo.FK_REC_EVE" FromRole="SAG01_RECIBO" ToRole="SAG01_EVENTO" />
+          <NavigationProperty Name="SAG01_EVENTO_OPCION" Relationship="ModelRecibo.FK_REC_OPC" FromRole="SAG01_RECIBO" ToRole="SAG01_EVENTO_OPCION" />
+          <NavigationProperty Name="SAG01_PAIS" Relationship="ModelRecibo.FK_REC_PAIS" FromRole="SAG01_RECIBO" ToRole="SAG01_PAIS" />
+        </EntityType>
+        <EntityType Name="SAG01_REGION">
+          <Key>
+            <PropertyRef Name="REGION" />
+          </Key>
+          <Property Name="REGION" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+          <NavigationProperty Name="SAG01_PAIS" Relationship="ModelRecibo.FK_REGION_PAIS" FromRole="SAG01_REGION" ToRole="SAG01_PAIS" />
+        </EntityType>
+        <EntityType Name="SAG01_USUARIO">
+          <Key>
+            <PropertyRef Name="USUARIO" />
+          </Key>
+          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+          <Property Name="ESTADO_REGISTRO" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+          <Property Name="USUARIO_CREACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_CREACION" Type="DateTime" />
+          <Property Name="USUARIO_MODIFICACION" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="FECHA_MODIFICACION" Type="DateTime" />
+        </EntityType>
+        <Association Name="FK_EVENTO">
+          <End Role="SAG01_EVENTO" Type="ModelRecibo.SAG01_EVENTO" Multiplicity="0..1" />
+          <End Role="SAG01_EVENTO_OPCION" Type="ModelRecibo.SAG01_EVENTO_OPCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO">
+              <PropertyRef Name="EVENTO" />
+            </Principal>
+            <Dependent Role="SAG01_EVENTO_OPCION">
+              <PropertyRef Name="EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_EVE">
+          <End Role="SAG01_EVENTO" Type="ModelRecibo.SAG01_EVENTO" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO">
+              <PropertyRef Name="EVENTO" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="EVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_OPC">
+          <End Role="SAG01_EVENTO_OPCION" Type="ModelRecibo.SAG01_EVENTO_OPCION" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_EVENTO_OPCION">
+              <PropertyRef Name="OPCION" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="OPCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REC_PAIS">
+          <End Role="SAG01_PAIS" Type="ModelRecibo.SAG01_PAIS" Multiplicity="0..1" />
+          <End Role="SAG01_RECIBO" Type="ModelRecibo.SAG01_RECIBO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_PAIS">
+              <PropertyRef Name="PAIS" />
+            </Principal>
+            <Dependent Role="SAG01_RECIBO">
+              <PropertyRef Name="PAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REGION_PAIS">
+          <End Role="SAG01_REGION" Type="ModelRecibo.SAG01_REGION" Multiplicity="0..1" />
+          <End Role="SAG01_PAIS" Type="ModelRecibo.SAG01_PAIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SAG01_REGION">
+              <PropertyRef Name="REGION" />
+            </Principal>
+            <Dependent Role="SAG01_PAIS">
+              <PropertyRef Name="REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelReciboStoreContainer" CdmEntityContainer="EntitiesRecibo">
+          <EntitySetMapping Name="SAG01_CORRELATIVO">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_CORRELATIVO">
+              <MappingFragment StoreEntitySet="SAG01_CORRELATIVO">
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="CORRELATIVO_DISPONIBLE" ColumnName="CORRELATIVO_DISPONIBLE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_EVENTO">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_EVENTO">
+              <MappingFragment StoreEntitySet="SAG01_EVENTO">
+                <ScalarProperty Name="EVENTO" ColumnName="EVENTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_EVENTO_OPCION">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_EVENTO_OPCION">
+              <MappingFragment StoreEntitySet="SAG01_EVENTO_OPCION">
+                <ScalarProperty Name="OPCION" ColumnName="OPCION" />
+                <ScalarProperty Name="EVENTO" ColumnName="EVENTO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_PAIS">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_PAIS">
+              <MappingFragment StoreEntitySet="SAG01_PAIS">
+                <ScalarProperty Name="PAIS" ColumnName="PAIS" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_RECIBO">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_RECIBO">
+              <MappingFragment StoreEntitySet="SAG01_RECIBO">
+                <ScalarProperty Name="RECIBO" ColumnName="RECIBO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+                <ScalarProperty Name="EVENTO" ColumnName="EVENTO" />
+                <ScalarProperty Name="OPCION" ColumnName="OPCION" />
+                <ScalarProperty Name="PAIS" ColumnName="PAIS" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_REGION">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_REGION">
+              <MappingFragment StoreEntitySet="SAG01_REGION">
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAG01_USUARIO">
+            <EntityTypeMapping TypeName="ModelRecibo.SAG01_USUARIO">
+              <MappingFragment StoreEntitySet="SAG01_USUARIO">
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ESTADO_REGISTRO" ColumnName="ESTADO_REGISTRO" />
+                <ScalarProperty Name="USUARIO_CREACION" ColumnName="USUARIO_CREACION" />
+                <ScalarProperty Name="FECHA_CREACION" ColumnName="FECHA_CREACION" />
+                <ScalarProperty Name="USUARIO_MODIFICACION" ColumnName="USUARIO_MODIFICACION" />
+                <ScalarProperty Name="FECHA_MODIFICACION" ColumnName="FECHA_MODIFICACION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

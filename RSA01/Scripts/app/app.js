@@ -1,0 +1,1 @@
+﻿var app = angular.module('appMain', ['ui.router', 'angular-table']);

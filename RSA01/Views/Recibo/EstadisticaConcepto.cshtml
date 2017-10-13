@@ -1,0 +1,43 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Seleccione Evento:</label>
+                <select class="form-control"
+                        ng-options="a.nombre for a in eventos"
+                        ng-model="idEvento"
+                        ng-change="listardatosconcepto(idEvento)">
+                </select>
+        </div>
+    </form>
+</div>
+<br />
+
+<div class="row" ng-show="mostrartabla">
+    <div class="col-md-6 col-md-offset-2">
+        <div class="table-responsive">
+            <header class="panel-heading">
+                Resumen por Cuentas
+            </header>
+            <table class="table table-condensed table-bordered table-striped table-advance flip-content">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Totalidad</th>
+                        <th>Total Cobrado</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="listado in listadatosconcepto">
+                    <tr>
+                        <td>{{listado.concepto}}</td>
+                        <td>{{listado.total}}</td>
+                        <td>Q {{listado.total_cobrado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
